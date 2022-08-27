@@ -56,7 +56,7 @@ while True:
     # compute the absolute difference between the current fram and the first frame
     frameDelta = cv2.absdiff(firstFrame, gray)
     # thresh = cv2.threshold(frameDelta, 25, 255, cv2.THRESH_BINARY)[1]
-    thresh = cv2.threshold(frameDelta, 30, 255, cv2.THRESH_BINARY)[1]
+    thresh = cv2.threshold(frameDelta, 28, 255, cv2.THRESH_BINARY)[1]
 
     # dilate the thresholded image to fill in holes, then find contours on thresholded image
     thresh = cv2.dilate(thresh, None, iterations=2)
@@ -77,7 +77,7 @@ while True:
 #------------------------------------------------------------------
 
     # draw the text and timestamp on the frame
-    cv2.putText(frame, "Status: {}".format(text), (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+    # cv2.putText(frame, "Status: {}".format(text), (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
     cv2.putText(frame, datetime.datetime.now().strftime("%A %d %B %Y %I:%M:%S%p"), (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.35, (0, 0, 255), 1)
 
     # show the frame and record if the user presses a key
