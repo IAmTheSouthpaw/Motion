@@ -85,7 +85,7 @@ while True:
     if key == ord('q'):
         break
 
-    time.sleep(0.05)
+    # time.sleep(0.05)
 
 # cleanup the camera and close any open windows
 vs.stop() if args.get("video", None) is None else vs.release()
