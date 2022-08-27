@@ -18,7 +18,7 @@ if args.get("video", None) is None:
     vs = VideoStream(src=0).start()
     time.sleep(2.0)
 # if the video argument is 'picamera', use installed ribbon camera
-elif args.get("video", None) is "picamera":
+elif args.get("video", None) == "picamera":
     vs = VideoStream(src=0, usePiCamera=True).start()
     time.sleep(2.0)
 # otherwise, we are reading from a video file
@@ -89,7 +89,7 @@ while True:
     if key == ord('q'):
         break
 
-    time.sleep(0.01)
+    # time.sleep(0.01)
 
 # cleanup the camera and close any open windows
 vs.stop() if args.get("video", None) is None else vs.release()
