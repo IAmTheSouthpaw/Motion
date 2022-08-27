@@ -18,9 +18,9 @@ if args.get("video", None) is None:
     vs = VideoStream(src=0).start()
     time.sleep(2.0)
 # if the video argument is 'picamera', use installed ribbon camera
-elif args.get("video", None) == "picamera":
-    vs = VideoStream(src=0, usePiCamera=True).start()
-    time.sleep(2.0)
+# elif args.get("video", None) == "picamera":
+#     vs = VideoStream(src=0, usePiCamera=True).start()
+#     time.sleep(2.0)
 # otherwise, we are reading from a video file
 else:
     vs = cv2.VideoCapture(args["video"])
@@ -55,7 +55,8 @@ while True:
 
     # compute the absolute difference between the current fram and the first frame
     frameDelta = cv2.absdiff(firstFrame, gray)
-    thresh = cv2.threshold(frameDelta, 25, 255, cv2.THRESH_BINARY)[1]
+    # thresh = cv2.threshold(frameDelta, 25, 255, cv2.THRESH_BINARY)[1]
+    thresh = cv2.threshold(frameDelta, 50, 255, cv2.THRESH_BINARY)[1]
 
     # dilate the thresholded image to fill in holes, then find contours on thresholded image
     thresh = cv2.dilate(thresh, None, iterations=2)
