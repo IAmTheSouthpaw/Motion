@@ -9,13 +9,17 @@ import cv2
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-v", "--video", help="path to the video file")
+ap.add_argument("-v", "--video", help="path to the video file. Use 'picamera' to use the native Raspberry Pi Camera (must be installed with ribbon cable).")
 ap.add_argument("-a", "--min-area", type=int, default=500, help="minimum area size")
 args = vars(ap.parse_args())
 
 # if the video argument is None, then we are reading from a webcam
 if args.get("video", None) is None:
     vs = VideoStream(src=0).start()
+    time.sleep(2.0)
+# if the video argument is 'picamera', use installed ribbon camera
+elif args.get("video", None) is "picamera":
+    vs = VideoStream(src=0, usePiCamera=True).start()
     time.sleep(2.0)
 # otherwise, we are reading from a video file
 else:
@@ -85,7 +89,7 @@ while True:
     if key == ord('q'):
         break
 
-    # time.sleep(0.05)
+    time.sleep(0.01)
 
 # cleanup the camera and close any open windows
 vs.stop() if args.get("video", None) is None else vs.release()
